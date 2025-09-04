@@ -1,8 +1,10 @@
 package com.samuel.moneymanager.services;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.samuel.moneymanager.dtos.ExpenseDTO;
@@ -23,6 +25,43 @@ public class ExpenseService {
 	private final ExpenseRepository expenseRepository;
 	
 	private final ProfileService profileService;
+
+	public List<ExpenseDTO> getCurrentMonthExpensesForCurrentUser() {
+		ProfileEntity profile = profileService.getCurrentProfile();
+		
+		LocalDate now = LocalDate.now();
+		LocalDate startDate = now.withDayOfMonth(1);
+		LocalDate endDate = now.withDayOfMonth(now.lengthOfMonth());
+		
+		List<ExpenseEntity> list = expenseRepository.findByProfileIdAndDateBetween(profile.getId(), startDate, endDate);
+		
+		return list.stream().map(this::toDTO).toList();
+	}
+	
+	public List<ExpenseDTO> getLatest5ExpensesForCurrentUser() {
+		ProfileEntity profile = profileService.getCurrentProfile();
+		
+		List<ExpenseEntity> list = expenseRepository.findTop5ByProfileIdOrderByDateDesc(profile.getId());
+		
+		return list.stream().map(this::toDTO).toList();
+	}
+	
+	public BigDecimal getTotalExpenseForCurrentUser() {
+		ProfileEntity profile = profileService.getCurrentProfile();
+		
+		BigDecimal total = expenseRepository.findTotalExpenseByProfileId(profile.getId());
+		
+		return total != null ? total : BigDecimal.ZERO;
+	}
+	
+	public List<ExpenseDTO> filterExpense(LocalDate startDate, LocalDate endDate, String keyword, Sort sort) {
+		ProfileEntity profile = profileService.getCurrentProfile();
+		
+		List<ExpenseEntity> list = expenseRepository.findByProfileIdAndDateBetweenAndNameContainingIgnoreCase(
+				profile.getId(), startDate, endDate, keyword, sort);
+		
+		return list.stream().map(this::toDTO).toList();
+	}
 	
 	public ExpenseDTO addExpense(ExpenseDTO dto) {
 		ProfileEntity profile = profileService.getCurrentProfile();
@@ -36,16 +75,17 @@ public class ExpenseService {
 		return toDTO(newExpense);
 	}
 	
-	public List<ExpenseDTO> getCurrentMonthExpensesForCurrentUser() {
+	public void deleteExpense(Long expenseId) {
 		ProfileEntity profile = profileService.getCurrentProfile();
 		
-		LocalDate now = LocalDate.now();
-		LocalDate startDate = now.withDayOfMonth(1);
-		LocalDate endDate = now.withDayOfMonth(now.lengthOfMonth());
+		ExpenseEntity entity = expenseRepository.findById(expenseId)
+				.orElseThrow(() -> new RuntimeException("Expense not Found"));
 		
-		List<ExpenseEntity> list = expenseRepository.findByProfileIdAndDateBetween(profile.getId(), startDate, endDate);
+		if(!entity.getProfile().getId().equals(profile.getId())) {
+			throw new RuntimeException("Unauthorized to Delete this Expense");
+		}
 		
-		return list.stream().map(this::toDTO).toList();
+		expenseRepository.delete(entity);
 	}
 	
 	private ExpenseEntity toEntity(ExpenseDTO dto, ProfileEntity profile, CategoryEntity category) {
