@@ -31,4 +31,7 @@ public interface ExpenseRepository extends JpaRepository<ExpenseEntity, Long> {
 	// SELECT * FROM tbl_expenses WHERE profile_id = ? AND date BETWEEN ? AND ? 
 	List<ExpenseEntity> findByProfileIdAndDateBetween(Long profileId, LocalDate startDate, LocalDate endDate);
 	
+	// SELECT * FROM tbl_expenses WHERE profile_id = ? AND date = ?
+	List<ExpenseEntity> findByProfileIdAndDate(Long profileId, LocalDate date);
+	
 }
