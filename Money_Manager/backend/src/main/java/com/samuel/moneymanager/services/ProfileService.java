@@ -3,6 +3,7 @@ package com.samuel.moneymanager.services;
 import java.util.Map;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -33,6 +34,9 @@ public class ProfileService {
 	
 	private final JWTUtil jwtUtil;
 	
+	@Value("${app.activation.url}")
+	private String activationURL;
+	
 	public ProfileDTO registerProfile(ProfileDTO profileDTO) {
 		ProfileEntity newProfile = toEntity(profileDTO);
 		
@@ -40,7 +44,7 @@ public class ProfileService {
 		newProfile = profileRepository.save(newProfile);
 		
 		// Send Activation Email
-		String activationLink = "http://localhost:8080/api/v1.0/activate?token=" + newProfile.getActivationToken();
+		String activationLink = activationURL + "/api/v1.0/activate?token=" + newProfile.getActivationToken();
 		String subject = "Activate Your Money Manager Account";
 		String body = "Click on the Following Link to Activate Your Account: " + activationLink;
 		emailService.sendEmail(newProfile.getEmail(), subject, body);
