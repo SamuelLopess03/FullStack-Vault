@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
 import Home from "./pages/Home";
@@ -16,6 +16,7 @@ function App() {
 
       <BrowserRouter>
         <Routes>
+          <Route path="/" Component={Root} />
           <Route path="/dashboard" element={<Home />} />
           <Route path="/income" element={<Income />} />
           <Route path="/expense" element={<Expense />} />
@@ -28,5 +29,15 @@ function App() {
     </>
   );
 }
+
+const Root = () => {
+  const isAuthenticated = !!localStorage.getItem("token");
+
+  return isAuthenticated ? (
+    <Navigate to={"/dashboard"} />
+  ) : (
+    <Navigate to={"/login"} />
+  );
+};
 
 export default App;
