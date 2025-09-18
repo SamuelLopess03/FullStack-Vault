@@ -1,5 +1,11 @@
+import { useUser } from "../hooks/useUser";
+
+import Dashboard from "../components/Dashboard";
+
 const Filter = () => {
-  return <div>Filter</div>;
+  useUser();
+
+  return <Dashboard activeMenu={"Filters"}>This is Filter Page</Dashboard>;
 };
 
 export default Filter;
