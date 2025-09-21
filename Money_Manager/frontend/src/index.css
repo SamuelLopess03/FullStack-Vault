@@ -6,6 +6,14 @@
   .btn-primary {
     @apply bg-purple-900 text-white rounded-md hover:bg-purple-600 transition duration-300;
   }
+
+  .add-btn {
+    @apply text-green-800 bg-green-100 font-semibold text-sm p-2;
+  }
+
+  .card {
+    @apply bg-white rounded-4xl shadow-sm;
+  }
 }
 
 body {
