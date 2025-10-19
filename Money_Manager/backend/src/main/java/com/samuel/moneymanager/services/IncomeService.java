@@ -7,10 +7,8 @@ import java.util.List;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.samuel.moneymanager.dtos.ExpenseDTO;
 import com.samuel.moneymanager.dtos.IncomeDTO;
 import com.samuel.moneymanager.entities.CategoryEntity;
-import com.samuel.moneymanager.entities.ExpenseEntity;
 import com.samuel.moneymanager.entities.IncomeEntity;
 import com.samuel.moneymanager.entities.ProfileEntity;
 import com.samuel.moneymanager.repositories.CategoryRepository;

@@ -1,6 +1,8 @@
 C:\Repositorios\Estudos-FullStack\Money_Manager\backend\src\main\java\com\samuel\moneymanager\configs\SecurityConfig.java
 C:\Repositorios\Estudos-FullStack\Money_Manager\backend\src\main\java\com\samuel\moneymanager\controllers\CategoryController.java
 C:\Repositorios\Estudos-FullStack\Money_Manager\backend\src\main\java\com\samuel\moneymanager\controllers\DashboardController.java
+C:\Repositorios\Estudos-FullStack\Money_Manager\backend\src\main\java\com\samuel\moneymanager\controllers\EmailController.java
+C:\Repositorios\Estudos-FullStack\Money_Manager\backend\src\main\java\com\samuel\moneymanager\controllers\ExcelController.java
 C:\Repositorios\Estudos-FullStack\Money_Manager\backend\src\main\java\com\samuel\moneymanager\controllers\ExpenseController.java
 C:\Repositorios\Estudos-FullStack\Money_Manager\backend\src\main\java\com\samuel\moneymanager\controllers\FilterController.java
 C:\Repositorios\Estudos-FullStack\Money_Manager\backend\src\main\java\com\samuel\moneymanager\controllers\HomeController.java
@@ -27,6 +29,7 @@ C:\Repositorios\Estudos-FullStack\Money_Manager\backend\src\main\java\com\samuel
 C:\Repositorios\Estudos-FullStack\Money_Manager\backend\src\main\java\com\samuel\moneymanager\services\CategoryService.java
 C:\Repositorios\Estudos-FullStack\Money_Manager\backend\src\main\java\com\samuel\moneymanager\services\DashboardService.java
 C:\Repositorios\Estudos-FullStack\Money_Manager\backend\src\main\java\com\samuel\moneymanager\services\EmailService.java
+C:\Repositorios\Estudos-FullStack\Money_Manager\backend\src\main\java\com\samuel\moneymanager\services\ExcelService.java
 C:\Repositorios\Estudos-FullStack\Money_Manager\backend\src\main\java\com\samuel\moneymanager\services\ExpenseService.java
 C:\Repositorios\Estudos-FullStack\Money_Manager\backend\src\main\java\com\samuel\moneymanager\services\IncomeService.java
 C:\Repositorios\Estudos-FullStack\Money_Manager\backend\src\main\java\com\samuel\moneymanager\services\NotificationService.java
