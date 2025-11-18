@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
-import cloudinary from "../lib/cloudinary.js";
+import cloudinary from "./cloudinary.js";
 
 /* ------ Functions Authentication ------ */
 export const generateToken = (userId) => {
